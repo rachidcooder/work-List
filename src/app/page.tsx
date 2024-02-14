@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import Items from "./Compoanent/items"
+import Items from "./Compoanent/Items"
 import { Timestamp, arrayUnion, collection, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -23,12 +23,13 @@ export default function Home() {
   const [taskType, setTasktype] = useState(0);
   const [err, setErr] = useState(false);
   const [textTask, setTexttask] = useState("");
-  const router = useRouter();
+
 
 
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
+    const router = useRouter();
     onAuthStateChanged(auth, (u) => {
       if (u) {
         const mappedUser: User = {

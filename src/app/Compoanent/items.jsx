@@ -5,7 +5,7 @@ import { db } from '../firebase';
 import { arrayRemove, arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 
 
-function items({ id, user }) {
+function Items({ id, user }) {
   const [isdone, setIsDone] = useState(false);
   const [alltasks, setallTasks] = useState([]);
   const [slectTask, setSelectTasks] = useState([]);
@@ -105,4 +105,4 @@ function items({ id, user }) {
   )
 }
 
-export default items
+export default Items
