@@ -5,6 +5,7 @@ import { Timestamp, arrayUnion, collection, doc, updateDoc } from "firebase/fire
 import { auth, db } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { v4 as uuid } from "uuid"
+import { useRouter } from 'next/navigation'
 
 
 interface User {
@@ -22,6 +23,8 @@ export default function Home() {
   const [taskType, setTasktype] = useState(0);
   const [err, setErr] = useState(false);
   const [textTask, setTexttask] = useState("");
+  const router = useRouter();
+
 
   const [user, setUser] = useState<User | null>(null)
 
@@ -35,6 +38,8 @@ export default function Home() {
         }
 
         setUser(mappedUser);
+      } else {
+        router.push("/login");
       }
     })
   }, [])
