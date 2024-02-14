@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Todo App",
+  title: "Task Manager",
   description: "todo app with nextJs ",
 };
 
