@@ -35,7 +35,7 @@ function page() {
   return (
     <main className='p-4 flex items-center justify-center bg-gray-400 h-screen' >
       <div className=' bg-white rounded-lg p-8'>
-        <h1 className='text-center text-2xl font-bold '>Todo App</h1>
+        <h1 className='text-center text-2xl font-bold '>Task Manger</h1>
 
         <form className=' flex flex-col space-w-3' onSubmit={onLogIn}>
           <input type='email' placeholder='email ' className='p-1 my-1 outline-none hover:bg-gray-200'

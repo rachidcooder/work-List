@@ -52,7 +52,7 @@ function page() {
     <main className='p-4 flex items-center justify-center bg-gray-400 h-screen' >
       <div className=' bg-white rounded-lg p-8 '>
         <div>
-          <h1 className='text-center text-xl font-bold'>Todo App</h1>
+          <h1 className='text-center text-xl font-bold'>Task Manger</h1>
         </div>
         <form className=' flex flex-col' onSubmit={onRegester}>
 
