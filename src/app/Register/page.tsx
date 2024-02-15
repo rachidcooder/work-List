@@ -70,7 +70,7 @@ function Register() {
           <button type='submit' className=' bg-blue-600 rounded p-1 mt-3 text-white hover:bg-blue-700' >Register</button>
           {err && <span className='text-xl text-red-500 p-2'>{err}</span>}
           <p className="text-sm text-gray-600 pt-3">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/login" className="text-blue-500 hover:underline font-semibold">
               Login
             </Link>
