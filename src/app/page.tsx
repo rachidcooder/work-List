@@ -119,7 +119,7 @@ export default function Home() {
       {toAdd && (<div className=" flex items-center justify-center  fixed top-0  right-0 bottom-0 left-0 z-10 duration-300">
         <div className=" bg-white rounded-md p-4 ">
           <div className="flex  pb-4">
-            <h1 className=" text-center py-2S text-2xl w-full text-blue-600 font-semibold">New task</h1>
+            <h1 className=" text-center py-2 text-2xl w-full text-blue-600 font-semibold">New task</h1>
             <button className=" text-end text-2xl text-red-700 font-bold hover:text-red-900 "
               onClick={() => { setToAdd(false); setErr(false) }}
             >x</button>
