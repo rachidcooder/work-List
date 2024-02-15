@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import Items from "./Compoanent/Items"
+import Items from "./Compoanent/Items.jsx"
 import { Timestamp, arrayUnion, collection, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -22,13 +22,13 @@ export default function Home() {
   const [taskType, setTasktype] = useState(0);
   const [err, setErr] = useState(false);
   const [textTask, setTexttask] = useState("");
-
+  const router = useRouter();
 
 
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
-    const router = useRouter();
+
     onAuthStateChanged(auth, (u) => {
       if (u) {
         const mappedUser: User = {
@@ -118,13 +118,13 @@ export default function Home() {
         <div className=" bg-white rounded-md p-4 ">
           <div className="flex  pb-4">
             <h1 className=" text-center py-2S text-2xl w-full text-blue-600 font-semibold">New task</h1>
-            <button className=" text-end text-2xl text-rose-700  "
+            <button className=" text-end text-2xl text-red-700 font-bold hover:text-red-900 "
               onClick={() => { setToAdd(false); setErr(false) }}
             >x</button>
           </div>
 
           <input type="text" placeholder="Add New task ..."
-            className=" outline-none rounded-sm p-1 w-full bg-gray-200 hover:bg-gray-300 "
+            className=" outline-none rounded-xl p-1 px-2 w-full bg-gray-200 hover:bg-gray-300 "
             value={textTask}
             onChange={(e) => setTexttask(e.target.value)}
           />
@@ -138,7 +138,7 @@ export default function Home() {
           </div>
 
           {err && <span className=" p-2 text-center text-red-400 font-medium">Select one option</span>}
-          <button className=" text-white font-bold bg-blue-600 hover:bg-blue-500 rounded-sm p-1 w-full"
+          <button className=" text-white font-bold bg-blue-600 hover:bg-blue-500 rounded-xl p-1 w-full"
             onClick={() => AddTask()}
           >Add</button>
         </div>
