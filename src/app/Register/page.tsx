@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import { doc, setDoc } from 'firebase/firestore';
 
 
-function page() {
+function Register() {
   const [err, setErr] = useState("");
   const [name, setName] = useState('');
   const [email, setEmail] = useState("");
@@ -83,4 +83,4 @@ function page() {
   )
 }
 
-export default page
+export default Register
