@@ -17,7 +17,7 @@ interface User {
 
 
 export default function Home() {
-  const [tab, setTab] = useState(1);
+  const [tab, setTab] = useState<number>(1);
   const [toAdd, setToAdd] = useState(false);
   const [taskType, setTasktype] = useState(0);
   const [err, setErr] = useState(false);

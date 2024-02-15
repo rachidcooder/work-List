@@ -6,30 +6,42 @@ import { db } from './firebase';
 import { arrayRemove, arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 
 
-// interface Item {
-//   id: String,
-//   text: String,
-//   type: Number,
-//   done: boolean
-// }
+interface Item {
+  id: String,
+  text: String,
+  type: Number,
+  done: boolean
+}
 
-// interface User {
-//   uid: string; // Unique identifier for the user
-//   email: string | null; // Email address of the user
-//   displayName?: string | null; // Display name of the user (optional)
-//   // Date when the user account was created 
-// }
+interface User {
+  uid: string; // Unique identifier for the user
+  email: string | null; // Email address of the user
+  displayName?: string | null; // Display name of the user (optional)
+  // Date when the user account was created 
+}
 
-function Items({ id, user }) {
+interface ItemsProps {
+  id: number;
+  user: User;
+}
+
+const Items: React.FC<ItemsProps> = ({ id, user }) => {
 
   const [isdone, setIsDone] = useState(false);
-  const [alltasks, setallTasks] = useState([]);
-  const [slectTask, setSelectTasks] = useState([]);
+  // Assuming Item represents a task
+  const [allTasks, setAllTasks] = useState<Item[]>([]);
+  const [selectTask, setSelectTask] = useState<Item[]>([]);
+
 
   useEffect(() => {
     if (user.uid) {
       const unSub = onSnapshot(doc(db, "tasks", user.uid), (doc) => {
-        doc.exists() && setallTasks(doc.data().tasks);
+        if (doc.exists()) {
+          const tasksData: Item[] = doc.data().tasks;
+          setAllTasks(tasksData);
+        }
+
+
       })
 
       return () => {
@@ -40,14 +52,14 @@ function Items({ id, user }) {
   }, []);
 
   useEffect(() => {
-    if (alltasks)
-      setSelectTasks(alltasks.filter((i) => {
-        return i.type === id;
-      }))
-  }, [id, alltasks]);
+    if (allTasks && allTasks.length > 0) {
+      setSelectTask(allTasks.filter((i) => i.type === id));
+    }
+  }, [id, allTasks]);
 
 
-  const deleteItem = async (it) => {
+
+  const deleteItem = async (it: any) => {
 
     const userTasksRef = doc(db, 'tasks', user.uid);
     try {
@@ -56,7 +68,7 @@ function Items({ id, user }) {
       const userTasksData = userTasksSnapshot.data();
 
       if (userTasksData) {
-        const tasks = userTasksData.tasks || [];
+        const tasks: Item[] = userTasksData.tasks || [];
         const updatedTasks = tasks.filter(item => item.id !== it.id);
         await updateDoc(userTasksRef, { tasks: updatedTasks });
         console.log('Item deleted from tasks array');
@@ -68,14 +80,14 @@ function Items({ id, user }) {
     }
 
   }
-  const onDonne = async (it) => {
+  const onDonne = async (it: any) => {
     const userTasksRef = doc(db, 'tasks', user.uid);
     try {
       const userTasksSnapshot = await getDoc(userTasksRef);
       const userTasksData = userTasksSnapshot.data();
 
       if (userTasksData) {
-        const tasks = userTasksData.tasks || [];
+        const tasks: Item[] = userTasksData.tasks || [];
         const itemIndex = tasks.findIndex(item => item.id === it.id);
 
         if (itemIndex !== -1) {
@@ -97,7 +109,7 @@ function Items({ id, user }) {
   return (
     <div className='flex flex-col'>
 
-      {slectTask.map((item, i) => {
+      {selectTask.map((item, i) => {
 
         return (
           <div key={i} className="pt-2 hover:bg-slate-200 rounded-sm px-1 w-full">
