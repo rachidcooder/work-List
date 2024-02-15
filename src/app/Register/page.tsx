@@ -2,8 +2,7 @@
 import Link from 'next/link';
 import React, { FormEvent, useState } from 'react'
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from '../firebase.js';
-//import { useRouter } from 'next/router';
+import { auth, db } from '../firebase.js'
 import { useRouter } from 'next/navigation'
 import { doc, setDoc } from 'firebase/firestore';
 

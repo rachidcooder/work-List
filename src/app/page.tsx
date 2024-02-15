@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
-import Items from "./Items"
-import { Timestamp, arrayUnion, collection, doc, updateDoc } from "firebase/firestore";
+import Items from "./Items.jsx"
+import { Timestamp, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { v4 as uuid } from "uuid"
@@ -30,15 +30,17 @@ export default function Home() {
   useEffect(() => {
 
     onAuthStateChanged(auth, (u) => {
-      if (u) {
+      if (u?.uid) {
         const mappedUser: User = {
           uid: u.uid,
           email: u.email ? u.email : null,
           displayName: u.displayName,
         }
 
+        console.log("user verified :")
         setUser(mappedUser);
       } else {
+        console.log("user not verified :")
         router.push("/login");
       }
     })
