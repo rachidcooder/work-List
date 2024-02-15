@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { unstable_SuspenseList, useEffect, useState } from "react";
 import Items from "./Items.jsx"
 import { Timestamp, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
@@ -28,24 +28,25 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
-
-    const unsub = onAuthStateChanged(auth, (u) => {
-      if (u?.uid) {
-        const mappedUser: User = {
-          uid: u.uid,
-          email: u.email ? u.email : null,
-          displayName: u.displayName,
+    const checkAuth = async () => {
+      const unsub = await onAuthStateChanged(auth, (u) => {
+        if (u?.uid) {
+          const mappedUser: User = {
+            uid: u.uid,
+            email: u.email ? u.email : null,
+            displayName: u.displayName,
+          }
+          setUser(mappedUser);
+        } else {
+          router.push("/login");
         }
+      })
 
-        console.log("user verified :")
-        setUser(mappedUser);
-      } else {
-        console.log("user not verified :")
-        router.push("/login");
-      }
-    })
-    return unsub();
-  }, [router, user]);
+    }
+
+    checkAuth();
+
+  }, []);
 
   const AddTask = async () => {
     if (taskType === 0) {
