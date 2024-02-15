@@ -49,11 +49,12 @@ function Login() {
           <button type='submit' className=' bg-blue-600 rounded p-1  my-1 mt-3 text-white'>Log in</button>
           <span className='text-xl text-red-500 p-2'>{err}</span>
           <p className="text-sm text-gray-600 pt-3">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/Register" className="text-blue-500 hover:underline font-semibold">
               Register
             </Link>
           </p>
+
         </form>
       </div>
     </main>

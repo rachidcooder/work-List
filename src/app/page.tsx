@@ -29,7 +29,7 @@ export default function Home() {
 
   useEffect(() => {
 
-    onAuthStateChanged(auth, (u) => {
+    const unsub = onAuthStateChanged(auth, (u) => {
       if (u?.uid) {
         const mappedUser: User = {
           uid: u.uid,
@@ -44,7 +44,8 @@ export default function Home() {
         router.push("/login");
       }
     })
-  }, [])
+    return unsub();
+  }, [router, user]);
 
   const AddTask = async () => {
     if (taskType === 0) {
@@ -65,11 +66,10 @@ export default function Home() {
         }
         );
         setToAdd(false);
-        setTexttask("")
+        setTexttask("");
       } catch (error) {
         console.log(error);
       }
-
     }
   }
 
@@ -80,15 +80,15 @@ export default function Home() {
         <div className="w-full">
           <h1 className='w-full text-4xl text-blue-600 font-semibold text-center  py-4' >Task Manager</h1>
           <ul className="flex justify-between text-xl p-2 w-full space-x-2 cursor-pointer text-white">
-            <li className={` ${tab == 1 ? "bg-blue-600 " : " bg-blue-400"} 
+            <li className={`${tab == 1 ? "bg-blue-600 " : " bg-blue-400"} 
                p-1 text-center w-full rounded-md  hover:bg-blue-600`}
               onClick={() => setTab(1)}
             > day</li>
-            <li className={` ${tab === 2 ? "bg-blue-600" : " bg-blue-400"} 
+            <li className={`${tab == 2 ? "bg-blue-600" : " bg-blue-400"} 
                p-1 text-center w-full rounded-md  hover:bg-blue-600`}
               onClick={() => setTab(2)}
             >week</li>
-            <li className={` ${tab === 3 ? "bg-blue-600" : " bg-blue-400"} 
+            <li className={`${tab == 3 ? "bg-blue-600" : " bg-blue-400"} 
                p-1 text-center w-full rounded-md  hover:bg-blue-600`}
               onClick={() => setTab(3)}
             >month</li>
