@@ -2,21 +2,23 @@
 import React, { useEffect, useState } from 'react'
 import { MdOutlineCheckBox, MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import { db } from '../firebase';
+import { db } from './firebase';
 import { arrayRemove, arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 
 
 // interface Item {
+//   id: String,
 //   text: String,
 //   type: Number,
 //   done: boolean
 // }
 
 // interface User {
-//   uid: string; 
-//   email: string | null; 
-//   displayName?: string | null;
-//}
+//   uid: string; // Unique identifier for the user
+//   email: string | null; // Email address of the user
+//   displayName?: string | null; // Display name of the user (optional)
+//   // Date when the user account was created 
+// }
 
 function Items({ id, user }) {
 

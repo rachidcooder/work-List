@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import Items from "./Compoanent/Items.jsx"
+import Items from "./Items.jsx"
 import { Timestamp, arrayUnion, collection, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
