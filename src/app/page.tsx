@@ -9,10 +9,9 @@ import { useRouter } from 'next/navigation'
 
 
 interface User {
-  uid: string; // Unique identifier for the user
-  email: string | null; // Email address of the user
-  displayName?: string | null; // Display name of the user (optional)
-  // Date when the user account was created 
+  uid: string;
+  email: string | null;
+  displayName?: string | null;
 }
 
 

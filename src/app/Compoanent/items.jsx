@@ -6,13 +6,26 @@ import { db } from '../firebase';
 import { arrayRemove, arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 
 
+// interface Item {
+//   text: String,
+//   type: Number,
+//   done: boolean
+// }
+
+// interface User {
+//   uid: string; 
+//   email: string | null; 
+//   displayName?: string | null;
+//}
+
 function Items({ id, user }) {
+
   const [isdone, setIsDone] = useState(false);
   const [alltasks, setallTasks] = useState([]);
   const [slectTask, setSelectTasks] = useState([]);
 
   useEffect(() => {
-    if (user) {
+    if (user.uid) {
       const unSub = onSnapshot(doc(db, "tasks", user.uid), (doc) => {
         doc.exists() && setallTasks(doc.data().tasks);
       })
